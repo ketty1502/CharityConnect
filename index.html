@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Charity Connect India</title>
+  <style>
+  :root {
+    --bg: aliceblue;
+    --accent: #007272;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  header {
+    background-color: var(--accent);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: white;
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    margin: 0.3rem 0.6rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: var(--accent);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+
+  nav button.active {
+    border-bottom: 2px solid var(--accent);
+    font-weight: bold;
+  }
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+ .tab-content {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tab-content:not(.active) {
+  display: none !important;
+}
+  .org-card {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+
+  .org-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .org-title {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  .org-desc {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .visit-btn {
+    padding: 0.4rem 1rem;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  footer {
+    background-color: var(--accent);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+  }
+
+  @media (max-width: 600px) {
+  nav {
+    justify-content: flex-start;    /* start tabs at left edge */
+    padding: 0.5rem 1rem;           /* give extra left/right padding */
+  }
+
+
+
+    .org-card {
+      padding: 1rem;
+    }
+
+    .tab-content {
+      padding: 1rem 0.5rem;
+    }
+  }
+  .visit-btn img {
+  display: inline-block;
+}
+
+
+.card-grid {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+}
+
+.trusted-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('mosttrusted.jpeg') center/cover no-repeat;
+  opacity: 0.2; /* soft, subtle */
+  z-index: 0;
+}
+
+.trusted-bg {
+  position: relative;
+  z-index: 1;
+}
+
+.medical-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('medical care.webp') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.medical-bg {
+  position: relative;
+  z-index: 1;
+}
+
+.edu-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('edu.webp') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.edu-bg {
+  position: relative;
+  z-index: 1;
+}
+.homeless-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('homeless.jpeg') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.homeless-bg {
+  position: relative;
+  z-index: 1;
+}
+.animal-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('animal.jpeg') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.animal-bg {
+  position: relative;
+  z-index: 1;
+}
+
+.disaster-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('disaster.jpeg') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.disaster-bg {
+  position: relative;
+  z-index: 1;
+}
+.elderly-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('elderly.jpeg') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.elderly-bg {
+  position: relative;
+  z-index: 1;
+}
+
+.about-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('about us.jpeg') center/cover no-repeat;
+  opacity: 0.1;
+  z-index: 0;
+   pointer-events: none; /* <-- This makes the overlay transparent to clicks */
+}
+
+.about-bg {
+  position: relative;
+  z-index: 1;
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>Charity Connect India</h1>
+    <p>Discover trusted charities across different causes</p>
+  </header>
+
+  <nav id="tabs">
+    <button class="tab active" onclick="switchTab(0)">About Us</button>
+    <button class="tab" onclick="switchTab(1)">Most Trusted</button>
+    <button class="tab" onclick="switchTab(2)">Medical Care</button>
+    <button class="tab" onclick="switchTab(3)">Educational</button>
+    <button class="tab" onclick="switchTab(4)">Homeless</button>
+    <button class="tab" onclick="switchTab(5)">Animal Welfare</button>
+    <button class="tab" onclick="switchTab(6)">Disaster Relief</button>
+    <button class="tab" onclick="switchTab(7)">Elderly Welfare</button>
+  </nav>
+
+  <main>
+    <section class="tab-content active about-bg">
+            <div style="max-width: 800px; margin: auto; padding: 1rem;">
+        <h2 style="color: var(--accent); margin-bottom: 1rem;">About Charity Connect India</h2>
+        <p style="font-size: 1rem; color: #333; line-height: 1.6;">
+          First and foremorest: Even if you do not wish to or are unable to donate, you can still support various charities by following their instagram accounts, extending their reach.
+          Charity Connect India is a dedicated platform that brings together genuine NGOs and compassionate donors across the country. 
+          Our mission is to bridge the gap between those who want to help and those who need it, ensuring every contribution reaches a meaningful cause.
+        </p>
+        
+        <p style="font-size: 1rem; color: #333; line-height: 1.6; margin-top: 1rem;">
+          We understand that choosing the right organization to support can be overwhelming. That’s why we personally verify every NGO listed on our platform. 
+          From child education and elderly care to disaster relief and environmental protection — we cover a wide range of causes that matter.
+        </p>
+
+        <p style="font-size: 1rem; color: #333; line-height: 1.6; margin-top: 1rem;">
+          Our platform allows you to:
+          <ul style="padding-left: 1.5rem; color: #333; font-size: 1rem; line-height: 1.6;">
+            <li>Discover NGOs by location, cause, or trust rating</li>
+            <li>Read real stories and updates from the ground</li>
+            <li>Donate securely and transparently</li>
+            <li>Track your impact and stay connected</li>
+          </ul>
+        </p>
+
+        <p style="font-size: 1rem; color: #333; line-height: 1.6; margin-top: 1rem;">
+          At Charity Connect India, we believe in kindness, accountability, and action. 
+          Whether you're donating for the first time or regularly supporting causes, we’re here to make sure your help truly counts.
+        </p>
+
+        <p style="font-size: 1rem; color: #333; line-height: 1.6; margin-top: 1rem;">
+          Join us in building a more compassionate India — one connection at a time.
+        </p>
+        <div style="text-align: center; margin-top: 2rem;">
+          <button id="continueToTrusted" style="padding: 0.75rem 1.5rem; background-color: var(--accent); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-content trusted-bg">
+      <div class="card-grid">
+      <div class="org-card">
+        <div class="org-title">Team Everest</div>
+        <div class="org-desc">Change a child's life now! We inspire everyone to volunteer and create a culture of giving.</div>
+        <a class="visit-btn" href="https://www.teameverest.ngo/donate" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/teameverestngo/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+    <div class="org-card">
+        <div class="org-title">Goonj</div>
+        <div class="org-desc">A powerful grassroots movement using urban surplus for rural development across India.</div>
+        <a class="visit-btn" href="https://goonj.org/donate/" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/goonj/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+    <div class="org-card">
+  <div class="org-title">The Akshaya Patra Foundation</div>
+  <div class="org-desc">Provides mid-day meals to millions of underprivileged children across India to ensure access to education and proper nutrition.</div>
+  <a class="visit-btn" href="https://www.akshayapatra.org/onlinedonations" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/theakshayapatrafoundation/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Smile Foundation</div>
+  <div class="org-desc">Focuses on empowering underprivileged children, youth, and women through education, healthcare, and skill development programs.</div>
+  <a class="visit-btn" href="https://www.smilefoundationindia.org/donation/#donate-online   " target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/smilefoundationindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">CRY - Child Rights and You</div>
+  <div class="org-desc">Focuses on child welfare by providing healthcare, education, and protecting the rights of underprivileged children across India.</div>
+  <a class="visit-btn" href="https://www.cry.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/cry_india/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+</div>
+    </section>
+
+    <section class="tab-content medical-bg ">
+      <!-- Medical -->
+       <div class="card-grid">
+      <div class="org-card">
+        <div class="org-title">Cancer Patients Aid Association</div>
+        <div class="org-desc">Supports poor cancer patients with treatment, food, lodging and medical aid.</div>
+        <a class="visit-btn" href="https://cancer.org.in/donate/" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/cpaaindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+      <div class="org-card">
+        <div class="org-title">Kailash Satyarthi Foundation</div>
+        <div class="org-desc">Protects children’s health and rights, including medical support and rescue from abuse.</div>
+        <a class="visit-btn" href="https://satyarthi.org.in/donate/" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/kscforg/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+      
+  
+
+<div class="org-card">
+  <div class="org-title">Sankara Eye Foundation India</div>
+  <div class="org-desc">Provides free high-quality eye surgeries to the poor through a sustainable rural outreach model.</div>
+  <a class="visit-btn" href="https://sankaraeye.com/donate/" target="_blank">Donate</a><a class="visit-btn" href="https://www.instagram.com/sankaraeye/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Narayan Seva Sansthan</div>
+  <div class="org-desc">Offers free medical surgeries, rehab, and education to the physically challenged and underprivileged.</div>
+  <a class="visit-btn" href="https://www.narayanseva.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/narayansevasansthan/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Indian Cancer Society</div>
+  <div class="org-desc">Supports cancer patients with detection, diagnosis, treatment aid, and rehabilitation services.</div>
+  <a class="visit-btn" href="https://www.indiancancersociety.org/how-you-can-help/donate" 
+  target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/indiancancersociety/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+</div>
+    </section>
+    
+
+    <section class="tab-content edu-bg">
+      <!-- Education -->
+       <div class="card-grid">
+      <div class="org-card">
+        <div class="org-title">Akshaya Patra</div>
+        <div class="org-desc">Provides nutritious school meals to underprivileged children to keep them in school.</div>
+        <a class="visit-btn" href="https://www.akshayapatra.org/onlinedonations" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/theakshayapatrafoundation/"  target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+      <div class="org-card">
+        <div class="org-title">Pratham</div>
+        <div class="org-desc">One of India’s largest education NGOs working to improve learning outcomes in children.</div>
+        <a class="visit-btn" href="https://pratham.org/donation/" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/pratham_ngo/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+      <div class="org-card">
+  <div class="org-title">Teach For India</div>
+  <div class="org-desc">Builds a movement of leaders to provide excellent education to all children across India.</div>
+  <a class="visit-btn" href="https://www.teachforindia.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/teachforindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+  
+</div>
+
+<div class="org-card">
+  <div class="org-title">Bhumi</div>
+  <div class="org-desc">Empowers underprivileged children through quality education and volunteer-driven programs.</div>
+  <a class="visit-btn" href="https://www.bhumi.ngo/bhumi-donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/bhumi_ngo/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Vidya India</div>
+  <div class="org-desc">Provides holistic education and vocational training to underprivileged children and youth.</div>
+  <a class="visit-btn" href="https://vidya-india.org/donate/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/vidya_india/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Isha Vidhya</div>
+  <div class="org-desc">Supports rural education by operating schools and providing scholarships in underserved communities.</div>
+  <a class="visit-btn" href="https://ishavidhya.org/donate/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/ishavidhya/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+</div>
+    </section>
+
+    <section class="tab-content homeless-bg">
+      <!-- Homeless -->
+       <div class="card-grid">
+      <div class="org-card">
+        <div class="org-title">Snehalaya</div>
+        <div class="org-desc">Supports homeless women and children, offering shelter, healthcare and education.</div>
+        <a class="visit-btn" href="https://www.snehalaya.org/donate" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/snehalayaindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+
+
+<div class="org-card">
+  <div class="org-title">Uday Foundation</div>
+  <div class="org-desc">Supports homeless families with shelter, food, clothing, and free medical care.</div>
+  <a class="visit-btn" href="https://www.udayfoundation.org/donate/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/udayfoundation/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Aashray Adhikar Abhiyan</div>
+  <div class="org-desc">Dedicated to the rights and rehabilitation of homeless people in Delhi through shelter and advocacy.</div>
+  <a class="visit-btn" href="https://pages.razorpay.com/pl_IkWAOpUCW49MeH/view" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/aashray.adhikar.abhiyan/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Project WHY</div>
+  <div class="org-desc">Supports slum dwellers and street children with education, nutrition, and shelter programs.</div>
+  <a class="visit-btn" href="https://projectwhy.org/donate/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/projectwhyindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+<div class="org-card">
+  <div class="org-title">The Homeless Foundation</div>
+  <div class="org-desc">Based in Mumbai, this NGO supports homeless individuals through education, nutrition, health services, and vocational training.</div>
+  <a class="visit-btn" href="https://www.thlf.org/donate-now.html" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/the_homelessfoundation/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+</div>
+    </section>
+
+    <section class="tab-content animal-bg">
+      <!-- Animal Welfare -->
+       <div class="card-grid">
+      <div class="org-card">
+        <div class="org-title">People for Animals (PFA)</div>
+        <div class="org-desc">India's largest animal welfare org rescuing and rehabilitating sick/injured animals.</div>
+        <a class="visit-btn" href="https://www.peopleforanimalsindia.org/donate" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/pfa.official/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+      
+
+<div class="org-card">
+  <div class="org-title">Animal Aid Unlimited</div>
+  <div class="org-desc">Rescues and treats street animals in India and provides them with medical care and rehabilitation.</div>
+  <a class="visit-btn" href="https://www.animalaidunlimited.org/donation/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/animalaid_india/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Wildlife SOS</div>
+  <div class="org-desc">Works to protect India's wildlife through rescue operations, rehabilitation, and conservation projects.</div>
+  <a class="visit-btn" href="https://wildlifesos.org/donate/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/wildlifesos/"" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+<div class="org-card">
+  <div class="org-title">Stray Animal Foundation India (SAFI)</div>
+  <div class="org-desc">Provides grants and support to local shelters, rescues, and community outreach programs to improve the lives of stray animals across India.</div>
+  <a class="visit-btn" href="https://strayanimalfoundationindia.org/india-donations/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/strayanimalfoundationindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+<div class="org-card">
+  <div class="org-title">In Defense of Animals India (IDA India)</div>
+  <div class="org-desc">A grassroots organization dedicated to protecting the rights of all animals through rescue operations, advocacy, and education.</div>
+  <a class="visit-btn" href="https://www.idaindia.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/indefenseofanimalsindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+</div>
+
+
+    </section>
+
+    <section class="tab-content disaster-bg">
+      <div class="card-grid">
+      <!-- Disaster Relief -->
+      <div class="org-card">
+        <div class="org-title">SEEDS India</div>
+        <div class="org-desc">Provides emergency response and disaster preparedness across vulnerable areas.</div>
+        <a class="visit-btn" href="https://www.seedsindia.org/donation/" target="_blank">Donate</a>
+        <a class="visit-btn" href="https://www.instagram.com/seeds_india/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+      </div>
+      <div class="org-card">
+  <div class="org-title">Goonj</div>
+  <div class="org-desc">Works on disaster relief by providing essential supplies like clothing, food, and other materials to communities in need.</div>
+  <a class="visit-btn" href="https://goonj.org/donate/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/goonj/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Sewa International</div>
+  <div class="org-desc">Provides disaster relief, rehabilitation, and long-term recovery for communities affected by natural disasters.</div>
+  <a class="visit-btn" href="https://sewausa.org/donate/" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/sewainternational/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Indian Red Cross Society</div>
+  <div class="org-desc">Offers immediate disaster relief, including medical care, shelter, and food to victims of disasters across India.</div>
+  <a class="visit-btn" href="https://indianredcross.org/ircs/donatenow" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/indian_red_cross_society/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Oxfam India</div>
+  <div class="org-desc">Provides relief in disaster-affected areas by delivering essential services and aiding the rebuilding process.</div>
+  <a class="visit-btn" href="https://www.oxfamindia.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/oxfam_india/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+</div>
+    </section>
+
+    <section class="tab-content elderly-bg">
+      <!-- Elderly Welfare -->
+       <div class="card-grid">
+      
+      <div class="org-card">
+  <div class="org-title">HelpAge India</div>
+  <div class="org-desc">Supports elderly people by providing healthcare, emotional care, and financial assistance for the elderly in need.</div>
+  <a class="visit-btn" href="https://www.helpageindia.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/helpageindia/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Elder Care</div>
+  <div class="org-desc">Offers support for elderly individuals in the form of home care, emotional counseling, and financial aid.</div>
+  <a class="visit-btn" href="https://www.eldercare.org.in/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/india_eldercare/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Dignity Foundation</div>
+  <div class="org-desc">Empowers senior citizens by offering opportunities for health, education, and social integration.</div>
+  <a class="visit-btn" href="https://www.dignityfoundation.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/dignity_foundation/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+
+<div class="org-card">
+  <div class="org-title">Sampoorna Sewa Foundation</div>
+  <div class="org-desc">Provides support services for elderly individuals, including medical care, shelter, and psychological support.</div>
+  <a class="visit-btn" href="https://www.sampoorna.org/donate" target="_blank">Donate</a>
+  <a class="visit-btn" href="https://www.instagram.com/sampoorna__sewa__foundation/" target="_blank"><img src="icons8-instagram-24.png" style="height: 20px; position: relative; top: 4px;"></a>
+</div>
+</div>
+    </section>
+    
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Charity Connect India. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    function switchTab(index) {
+  tabs.forEach((tab, i) => {
+    tab.classList.remove("active");
+    tabContents[i].classList.remove("active");
+    if (i === index) {
+      tab.classList.add("active");
+      tabContents[i].classList.add("active");
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("continueToTrusted").addEventListener("click", () => {
+    switchTab(1);
+  });
+});
+
+
+    // Handle swipe on mobile
+    let touchStartX = 0;
+let touchEndX = 0;
+const minSwipeDistance = 50; // Minimum distance in px to trigger swipe
+
+document.addEventListener("touchstart", e => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener("touchend", e => {
+  touchEndX = e.changedTouches[0].screenX;
+  const deltaX = touchEndX - touchStartX;
+
+  if (Math.abs(deltaX) > minSwipeDistance) {
+    const currentIndex = Array.from(tabs).findIndex(tab => tab.classList.contains("active"));
+    if (deltaX < 0 && currentIndex < tabs.length - 1) {
+      switchTab(currentIndex + 1); // Swipe left
+    } else if (deltaX > 0 && currentIndex > 0) {
+      switchTab(currentIndex - 1); // Swipe right
+    }
+  }
+});
+
+  </script>
+</body>
+</html>
