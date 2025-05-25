@@ -10,6 +10,30 @@
     --bg: aliceblue;
     --accent: #007272;
   }
+header {
+  position: relative;
+  z-index: 0;
+  background-color: var(--accent);
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('head2.png') center/cover no-repeat;
+  opacity: 0.2  ; /* Soft, subtle overlay */
+  z-index: 0;
+  pointer-events: none;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1; /* Ensures it appears above the background image */
+  text-align: center;
+  color: white;
+  padding: 1rem;
+}
 
   * {
     box-sizing: border-box;
@@ -19,7 +43,7 @@
   }
 
   body {
-    background-color: var(--bg);
+    background-color: #d5f0f0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -116,12 +140,30 @@ main {
   }
 
   footer {
-    background-color: var(--accent);
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: auto;
-  }
+  position: relative;
+  z-index: 0;
+  background-color: var(--accent);
+  overflow: hidden;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('foot.png') center/cover no-repeat;
+  opacity: 0.1; /* Adjust as needed */
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 1; /* Keep text above image */
+}
+
 
   @media (max-width: 600px) {
   nav {
@@ -266,9 +308,12 @@ main {
 </head>
 <body>
   <header>
+  <div class="header-content">
     <h1>Charity Connect India</h1>
     <p>Discover trusted charities across different causes</p>
-  </header>
+  </div>
+</header>
+
 
   <nav id="tabs">
     <button class="tab active" onclick="switchTab(0)">About Us</button>
@@ -600,10 +645,12 @@ main {
     </section>
     
   </main>
-
-  <footer>
+<footer>
+  <div class="footer-content">
     <p>&copy; 2025 Charity Connect India. All rights reserved.</p>
-  </footer>
+  </div>
+</footer>
+
 
   <script>
     const tabs = document.querySelectorAll(".tab");
